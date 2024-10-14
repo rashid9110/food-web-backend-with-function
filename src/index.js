@@ -6,6 +6,7 @@ const ServerConfig= require('./config/serverConfig')
 const connectDB=require('./config/dbConfig');
 const userRouter = require("./routes/userRoute");
 const cartRouter = require("./routes/cartRoute");
+const authRouter = require("./routes/authRoute");
 // const User = require("./schema/userSchema");
 
 const app=express();
@@ -17,8 +18,8 @@ app.use(express.urlencoded({extended: true}));
 //Routing middleware
 //if your res route starts with /User then handle it using userRouter
 app.use('/User',userRouter);//connect the router to the server
-
 app.use('/carts',cartRouter);
+app.use('/auth',authRouter)
 
 app.post('/ping',(req,res)=>{
     console.log(req.body); 
