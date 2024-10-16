@@ -1,5 +1,7 @@
 
 const express=require("express")
+
+const cookieParser=require('cookie-parser');
 // const badyParser=require('body-parser')
 
 const ServerConfig= require('./config/serverConfig')
@@ -7,12 +9,14 @@ const connectDB=require('./config/dbConfig');
 const userRouter = require("./routes/userRoute");
 const cartRouter = require("./routes/cartRoute");
 const authRouter = require("./routes/authRoute");
+const { isLoggedIn } = require("./validation/authValidator");
 // const User = require("./schema/userSchema");
 
 const app=express();
 
-app.use(express.json())
-app.use(express.text())
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.text());
 app.use(express.urlencoded({extended: true}));
 
 //Routing middleware
@@ -21,8 +25,9 @@ app.use('/User',userRouter);//connect the router to the server
 app.use('/carts',cartRouter);
 app.use('/auth',authRouter)
 
-app.post('/ping',(req,res)=>{
+app.get('/pong',isLoggedIn,(req,res)=>{
     console.log(req.body); 
+    console.log(req.cookies);
     return res.json({message: 'pong'});    
 });
 
