@@ -11,7 +11,6 @@ async function isLoggedIn(req,res,next) {
             error:'Not authenticated',
             message:'No Auth Token provided'
         })
-
     }
 
     
