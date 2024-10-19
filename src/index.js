@@ -1,6 +1,4 @@
-
 const express=require("express")
-
 const cookieParser=require('cookie-parser');
 // const badyParser=require('body-parser')
 
@@ -14,6 +12,7 @@ const uploader = require("./middlewares/multerMiddlewares");
 // const User = require("./schema/userSchema");
 const cloudinary=require('./config/cloudinaryConfig');
 const fs=require('fs/promises');
+const productRouter = require("./routes/productRoute");
 
 const app=express();
 
@@ -27,6 +26,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/User',userRouter);//connect the router to the server
 app.use('/carts',cartRouter);
 app.use('/auth',authRouter)
+app.use('/products',productRouter)
 
 app.get('/pong',isLoggedIn,(req,res)=>{
     console.log(req.body); 
@@ -34,18 +34,16 @@ app.get('/pong',isLoggedIn,(req,res)=>{
     return res.json({message: 'pong'});    
 });
 
-app.post('/photo',uploader.single('IncomingFile'),async(req,res)=>{
-    console.log(req.file);
-    const result =await cloudinary.uploader.upload(req.file.path);
-    console.log('result from cloudinary',result);
-    await fs.unlink(req.file.path);
-    return res.json({message: 'ok'});
-})
+    // app.post('/photo',uploader.single('IncomingFile'),async(req,res)=>{
+    //     console.log(req.file);
+    //     const result =await cloudinary.uploader.upload(req.file.path);
+    //     console.log('result from cloudinary',result);
+    //     await fs.unlink(req.file.path);
+    //     return res.json({message: 'ok'});
+    // })
 app.listen(ServerConfig.PORT,async ()=>{
-    await connectDB();
-    console.log(`Server started at port ${ServerConfig.PORT}`);
-
-    
+    await connectDB(); 
+    console.log(`Server started at port ${ServerConfig.PORT}`); 
 });
  
 
