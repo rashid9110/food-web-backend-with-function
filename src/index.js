@@ -30,8 +30,8 @@ app.use('/products',productRouter)
 
 app.get('/pong',isLoggedIn,(req,res)=>{
     console.log(req.body); 
-    console.log(req.cookies);
-    return res.json({message: 'pong'});    
+    console.log(req.cookies); 
+    return res.json({message: 'pong'});     
 });
 
     // app.post('/photo',uploader.single('IncomingFile'),async(req,res)=>{
@@ -41,6 +41,8 @@ app.get('/pong',isLoggedIn,(req,res)=>{
     //     await fs.unlink(req.file.path);
     //     return res.json({message: 'ok'});
     // })
+
+
 app.listen(ServerConfig.PORT,async ()=>{
     await connectDB(); 
     console.log(`Server started at port ${ServerConfig.PORT}`); 

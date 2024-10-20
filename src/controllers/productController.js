@@ -1,4 +1,5 @@
-const { createProduct } = require("../services/productService");
+const { createProduct, deleteProductById, getProductById } = require("../services/productService");
+const AppError = require("../utils/appError");
 
 
 async function addProduct(req,res) {
@@ -7,7 +8,7 @@ async function addProduct(req,res) {
         const product=await createProduct({
             productName:req.body.productName,
             description:req.body.description,
-            imagePath:req.file.path,
+            imagePath:req.file?.path,
             price:req.body.price,
             category:req.body.category,//if category is undefined, veg will be stored
             inStock:req.body.inStock,//if inStock is underfind then true will be stored
@@ -17,22 +18,93 @@ async function addProduct(req,res) {
             success:true,
             message:'successfully create the product',
             error:{},
-            data:product,
+            data:product, 
         })
     } catch (error) {
+        if(error instanceof AppError){
+            return res.status(error.statusCode).json({
+                success:false,
+                message:error.reasson,
+                data:{},
+                error:error,
+            })
+        }
         console.log(error);
-        return res.status(error.statusCode).json({
+        return res.status(500).json({
             success:false,
-            message:error.reasson,
+            message:'something want worng',
             data:{},
             error:error,
         })
     }
-   
 }
+
+async function getProduct(req,res) {
+    try {
+        const resource=await getProductById(req.params.id);
+        return res.status(200).json({
+            success:true,
+            message:'SuccessFully fetched the product',
+            error:{},
+            data:resource,
+        })
+      
+    } catch (error) {
+        console.log(error);
+        if(error instanceof AppError){
+            return res.status(error.statusCode).json({
+                success:false,
+                message:error.message,
+                data:{},
+                error:error,
+            })
+        }
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:'something want worng',
+            data:{},
+            error:error,
+        })
+    }
+}
+
+async function deleteProduct(req,res) {
+    try {
+        const resource=await deleteProductById(req.params.id);
+        console.log(resource)
+        return res.status(200).json({  
+            success:true,
+            message:'SuccessFully Deleted the product',
+            error:{},
+            data:resource,
+        })
+    } catch (error) {
+        if(error instanceof AppError){
+            return res.status(error.statusCode).json({
+                success:false,
+                message:error.message,
+                data:{},
+                error:error,
+            })
+        }
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:'something want worng',
+            data:{},
+            error:error,
+        })
+    }
+}
+
+
+
 
 
 module.exports={
     addProduct,
+    getProduct,
+    deleteProduct,
 }
 
