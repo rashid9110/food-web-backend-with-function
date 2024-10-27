@@ -1,5 +1,5 @@
 const { createUser, findUser } = require("../repositories/userRepository");
-
+const {createCart}=require('../repositories/cartRepositories')
   
     async function registerUser(userDetails){
       //it will created a brand new user in a db
@@ -30,6 +30,7 @@ const { createUser, findUser } = require("../repositories/userRepository");
         throw {reason: 'Something went worng, connot create user', statusCode: 500}
       }
 
+      await createCart(newUser._id);
       //return the details of create user
 
       return newUser;

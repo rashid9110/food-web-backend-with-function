@@ -25,8 +25,8 @@ app.use(express.urlencoded({extended: true}));
 //if your res route starts with /User then handle it using userRouter
 app.use('/User',userRouter);//connect the router to the server
 app.use('/carts',cartRouter);
-app.use('/auth',authRouter)
-app.use('/products',productRouter)
+app.use('/auth',authRouter);
+app.use('/products',productRouter);
 
 app.get('/pong',isLoggedIn,(req,res)=>{
     console.log(req.body); 
