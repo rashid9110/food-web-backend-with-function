@@ -23,7 +23,8 @@ const {createCart}=require('../repositories/cartRepositories')
         password:userDetails.password,
         firstName:userDetails.firstName,
         lastName:userDetails.lastName,
-        mobilNumber:userDetails.mobilNumber
+        mobilNumber:userDetails.mobilNumber,
+        role:userDetails.role,
       })
 
       if(!newUser){
