@@ -6,7 +6,7 @@ const orderSchema=new mongoose.Schema({
         ref:"User",
         required:true
     },
-    item:[
+    items:[
         {
             product:{
                 type:mongoose.Schema.Types.ObjectId,
@@ -25,7 +25,7 @@ const orderSchema=new mongoose.Schema({
         type:Number,
         required:true,
 
-    },
+    }, 
     status:{
         type:String,
         default:"ORDERED",
@@ -44,5 +44,5 @@ const orderSchema=new mongoose.Schema({
 timestamps:true,
 })
 
-const Order=mongoose.module('Order',orderSchema);
+const Order=mongoose.model('Order',orderSchema);
 module.exports=Order;
