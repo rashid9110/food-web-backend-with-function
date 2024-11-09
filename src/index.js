@@ -7,11 +7,6 @@ const connectDB=require('./config/dbConfig');
 const userRouter = require("./routes/userRoute");
 const cartRouter = require("./routes/cartRoute");
 const authRouter = require("./routes/authRoute");
-const { isLoggedIn } = require("./validation/authValidator");
-const uploader = require("./middlewares/multerMiddlewares");
-// const User = require("./schema/userSchema");
-const cloudinary=require('./config/cloudinaryConfig');
-const fs=require('fs/promises');
 const productRouter = require("./routes/productRoute");
 const orderRouter = require("./routes/orderRouter");
 
@@ -30,7 +25,7 @@ app.use('/auth',authRouter);
 app.use('/products',productRouter);
 app.use('/orders',orderRouter);
 
-app.get('/pong',isLoggedIn,(req,res)=>{
+app.get('/pong',(req,res)=>{
     console.log(req.body); 
     console.log(req.cookies); 
     return res.json({message: 'pong'});     
