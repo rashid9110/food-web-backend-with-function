@@ -23,7 +23,18 @@ async function createProduct(productDetails) {
 async function getProductById(productId) {
     try {
         const product=await Product.findById(productId);
+
         return product;
+    } catch (error) {
+        console.log(error)
+        throw new InternalServerError();
+    }
+}
+
+async function getAllProducts() {
+    try {
+        const products=await Product.find({});
+        return products;
     } catch (error) {
         console.log(error)
         throw new InternalServerError();
@@ -44,4 +55,5 @@ module.exports={
     createProduct,
     getProductById,
     deleteProductById,
+    getAllProducts,
 }

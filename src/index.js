@@ -1,5 +1,6 @@
 const express=require("express")
 const cookieParser=require('cookie-parser');
+const cors=require('cors');
 // const badyParser=require('body-parser')
 
 const ServerConfig= require('./config/serverConfig');
@@ -11,6 +12,10 @@ const productRouter = require("./routes/productRoute");
 const orderRouter = require("./routes/orderRouter");
 
 const app=express();
+app.use(cors({
+    origin:'http://localhost:5173',
+    credentials: true
+}));
 
 app.use(cookieParser());
 app.use(express.json());

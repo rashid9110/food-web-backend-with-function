@@ -1,4 +1,6 @@
 const User=require('../schema/userSchema');
+const BadRequestError = require('../utils/badRequestError');
+const InternalServerError = require('../utils/InternalServerError');
 
 
 
@@ -14,10 +16,20 @@ const User=require('../schema/userSchema');
 
     async function createUser(userDetails){
         try{
+            console.log(userDetails)
             const response=await User.create(userDetails)
             return response;
         }catch(error){
-            console.log(error);
+            if (error.name === 'ValidationError') {
+                // Extract validation error messages
+                const errorMessageList = Object.keys(error.errors).map((property) => {
+                    return error.errors[property]?.message || 'Validation error';
+                });
+                console.log(errorMessageList)
+                throw new BadRequestError(errorMessageList); // Assuming BadRequestError accepts an array
+            }
+            // console.log(error);
+            throw new InternalServerError();
         }
     }
 

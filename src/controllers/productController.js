@@ -1,4 +1,4 @@
-const { createProduct, deleteProductById, getProductById } = require("../services/productService");
+const { createProduct, deleteProductById, getProductById, getAllProductsData } = require("../services/productService");
 const AppError = require("../utils/appError");
 
 
@@ -24,7 +24,7 @@ async function addProduct(req,res) {
         if(error instanceof AppError){
             return res.status(error.statusCode).json({
                 success:false,
-                message:error.reasson,
+                message:error.message,
                 data:{},
                 error:error,
             })
@@ -42,6 +42,36 @@ async function addProduct(req,res) {
 async function getProduct(req,res) {
     try {
         const resource=await getProductById(req.params.id);
+        return res.status(200).json({
+            success:true,
+            message:'SuccessFully fetched the product',
+            error:{},
+            data:resource,
+        })
+      
+    } catch (error) {
+        console.log(error);
+        if(error instanceof AppError){
+            return res.status(error.statusCode).json({
+                success:false,
+                message:error.message,
+                data:{},
+                error:error,
+            })
+        }
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:'something want worng',
+            data:{},
+            error:error,
+        })
+    }
+}
+
+async function getProducts(req,res) {
+    try {
+        const resource=await getAllProductsData();
         return res.status(200).json({
             success:true,
             message:'SuccessFully fetched the product',
@@ -106,5 +136,6 @@ module.exports={
     addProduct,
     getProduct,
     deleteProduct,
+    getProducts,
 }
 

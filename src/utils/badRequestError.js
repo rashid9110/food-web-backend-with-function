@@ -8,6 +8,7 @@ class BadRequestError extends AppError{
             message+=`${params}\n`;
 
         });
+        console.error(message);
         super(`The requist has the following invalid parameters \n${invalidParams}`,400);
     }
 }
