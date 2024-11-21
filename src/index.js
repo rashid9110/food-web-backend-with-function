@@ -52,4 +52,4 @@ app.listen(ServerConfig.PORT,async ()=>{
  
 
 //localhoust:5500/User - POST
-//localhoust:5500/carts/1234 -GET
+//localhoust:5500/carts/1234 -GET    

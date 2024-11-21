@@ -31,7 +31,7 @@ async function getProductById(productId) {
     }
 }
 
-async function getAllProducts() {
+async function getAllProducts() { 
     try {
         const products=await Product.find({});
         return products;
