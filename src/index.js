@@ -13,7 +13,7 @@ const orderRouter = require("./routes/orderRouter");
 
 const app=express();
 app.use(cors({
-    origin:'http://localhost:5173',
+    origin:'https://foodcomafrontend1.netlify.app/',
     credentials: true
 }));
 
