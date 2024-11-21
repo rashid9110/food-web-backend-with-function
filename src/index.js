@@ -13,9 +13,9 @@ const orderRouter = require("./routes/orderRouter");
 
 const app=express();
 app.use(cors({
-    origin:'https://foodcomafrontend1.netlify.app',
+    origin:'https://pizza-frontend-lqpl.vercel.app',
     credentials: true
-}));
+})); 
 
 app.use(cookieParser());
 app.use(express.json());
