@@ -3,6 +3,8 @@ const { JWT_SECRET } = require('../config/serverConfig');
 const UnauthorisedError = require('../utils/unauthorisedError');
 
 async function isLoggedIn(req,res,next) {
+    console.log("Cookies from Request:", req.cookies);
+
     const token=req.cookies['authToken'];
 
     if(!token){
