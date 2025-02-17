@@ -13,14 +13,14 @@ const orderRouter = require("./routes/orderRouter");
 
 const app=express();
 app.use(cors({
-    origin:'https://pizza-frontend-lqpl.vercel.app',
+    origin:ServerConfig.FRONTEND_URL,
     credentials: true
-})); 
-
+}));  
+   
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.text());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: true})); 
 
 //Routing middleware
 //if your res route starts with /User then handle it using userRouter

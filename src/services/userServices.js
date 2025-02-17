@@ -5,6 +5,7 @@ const {createCart}=require('../repositories/cartRepositories')
       //it will created a brand new user in a db
 
       //you need to check if the user with this email and mobile number
+      // console.log(userDetails)
 
       const User= await findUser({
         email: userDetails.email,
@@ -26,7 +27,7 @@ const {createCart}=require('../repositories/cartRepositories')
         mobilNumber:userDetails.mobilNumber,
         role:userDetails.role,
       })
-
+     console.log(newUser);
       if(!newUser){
         throw {reason: 'Something went worng, connot create user', statusCode: 500}
       }

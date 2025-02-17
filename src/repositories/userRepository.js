@@ -18,8 +18,11 @@ const InternalServerError = require('../utils/InternalServerError');
         try{
             console.log(userDetails)
             const response=await User.create(userDetails)
+            console.log(response)
             return response;
         }catch(error){
+            console.error("Unexpected Error:", error);
+
             if (error.name === 'ValidationError') {
                 // Extract validation error messages
                 const errorMessageList = Object.keys(error.errors).map((property) => {

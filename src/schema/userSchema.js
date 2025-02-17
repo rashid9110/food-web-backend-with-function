@@ -22,13 +22,13 @@ const userSchema=new mongoose.Schema({
         maxlength:[20, "First name should be less then or equal to 20 character"],
     },
 
-    mobilNumber:{
+    mobileNumber:{
         type:String,
         trim:true,
         maxlength:[12,"Phone number should be of length 10"],
         minlength:[10,"Phone number should be of length 10"],
         unique:[true, "Phone number is already is use"],
-        required:[true,"Phone number should be provided"]
+        // required:[true,"Phone number should be provided"]
     },
 
     email:{
