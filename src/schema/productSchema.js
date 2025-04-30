@@ -22,7 +22,7 @@ const productSchema=new mongoose.Schema({
     },
     price:{
         type:Number,
-        required:[true,'Price most be required'],
+        required:[true,'Price most be required'], 
         tirm:true,
     },
    category:{
